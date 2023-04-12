@@ -8,6 +8,7 @@ import Surveys from '../views/Surveys.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import DefaultLayout from '../components/DefaultLayout.vue'
+import store from '../store'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -16,6 +17,9 @@ const router = createRouter({
       path: "/",
       redirect: "/dashboard",
       component: DefaultLayout,
+      meta: {
+        requiresAuth: true
+      },
       children: [
         {
         path: "/dashboard",
@@ -40,6 +44,18 @@ const router = createRouter({
       component: Register
     },
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  // if user is not logged in redirect to login
+  if(to.meta.requiresAuth && !store.state.user.token){
+    next({name: 'Login'})
+  } else if (store.state.user.token && (to.name === 'Login' || to.name === 'Register')) {
+    // if user is logged in redirect to dashboard if user tries to access login and register
+    next({name: 'Dashboard'})
+  } else {
+    next()
+  }
 })
 
 export default router;
