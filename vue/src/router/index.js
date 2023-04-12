@@ -39,6 +39,9 @@ const router = createRouter({
       redirect: "/login",
       name: "Auth",
       component: AuthLayout,
+      meta: {
+        isGuest: true
+      },
       children: [
         {
           path: "/login",
@@ -60,7 +63,7 @@ router.beforeEach((to, from, next) => {
   // if user is not logged in redirect to login
   if(to.meta.requiresAuth && !store.state.user.token){
     next({name: 'Login'})
-  } else if (store.state.user.token && (to.name === 'Login' || to.name === 'Register')) {
+  } else if (store.state.user.token && (to.meta.isGuest)) {
     // if user is logged in redirect to dashboard if user tries to access login and register
     next({name: 'Dashboard'})
   } else {
