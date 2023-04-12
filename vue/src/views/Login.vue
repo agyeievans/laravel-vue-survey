@@ -10,7 +10,7 @@
     <p class="mt-2 text-center text-sm text-gray-600">
       Or
       {{ ' ' }}
-      <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">start your 14-day free trial</a>
+      <router-link :to="{name: 'Register'}" class="font-medium text-indigo-600 hover:text-indigo-500">Register for free</router-link>
     </p>
   </div>
   <form class="mt-8 space-y-6" action="#" method="POST">
@@ -35,10 +35,6 @@
         <input id="remember-me" name="remember-me" type="checkbox"
           class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
         <label for="remember-me" class="ml-2 block text-sm text-gray-900">Remember me</label>
-      </div>
-
-      <div class="text-sm">
-        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Forgot your password?</a>
       </div>
     </div>
 
