@@ -6,32 +6,21 @@ import {
 import Dashboard from '../views/Dashboard.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
-
-// const routes = [{
-//     path: '/',
-//     name: 'Dashboard',
-//     component: Dashboard
-//   },
-//   {
-//     path: '/login',
-//     name: 'login',
-//     component: Login
-//   },
-//   {
-//     path: '/register',
-//     name: 'Register',
-//     component: Register
-//   },
-
-// ]
+import DefaultLayout from '../components/DefaultLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
       path: "/",
-      name: "Dashboard",
-      component: Dashboard
+      redirect: "/dashboard",
+      component: DefaultLayout,
+      children: [{
+        path: "/dashboard",
+        name: "Dashboard",
+        component: Dashboard
+      },
+    ]
     },
     {
       path: "/login",
