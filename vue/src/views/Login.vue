@@ -14,6 +14,16 @@
     </p>
   </div>
   <form class="mt-8 space-y-6" @submit="login">
+    <!-- error handling -->
+    <div v-if="errorMsg" class="py-3 px-5 bg-red-500 text-white rounded flex items-center justify-between">
+      {{ errorMsg }}
+      <span @click="errorMsg = '' " class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0.2)]">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </span>
+    </div>
+
     <input type="hidden" name="remember" value="true" />
     <div class="-space-y-px rounded-md shadow-sm">
       <div>
@@ -51,9 +61,10 @@
 </template>
 
 <script setup>
-import { LockClosedIcon } from '@heroicons/vue/20/solid'
-import store from "../store"
-import {useRouter} from "vue-router"
+import { LockClosedIcon } from '@heroicons/vue/20/solid';
+import store from "../store";
+import {useRouter} from "vue-router";
+import {ref} from "vue";
 
 const router = useRouter();
 
@@ -73,5 +84,11 @@ function login(ev) {
       name: 'Dashboard'
     })
   })
+  .catch(err => {
+    errorMsg.value = err.response.data.error
+  })
 }
+
+// error message handling
+let errorMsg = ref('')
 </script>
