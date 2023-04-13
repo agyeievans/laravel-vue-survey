@@ -91,11 +91,13 @@ export default{
     const router = useRouter();
 
     // logout function
-    function logout(){
-      store.commit('logout');
-      router.push({
-        name: 'Login'
-      })
+    function logout()  {
+      store.dispatch('logout')
+      .then(() => {
+        router.push({
+          name: 'Login'
+        });
+      });
     }
 
     return{
