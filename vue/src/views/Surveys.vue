@@ -39,5 +39,12 @@ import store from '../store';
 import { computed } from 'vue';
 
 const surveys = computed(() => store.state.surveys);
+
+// Delete survey
+function deleteSurvey(survey) {
+  if(confirm('Are you sure you want to delete this survey? Operation cannot be undone.')) {
+    // store.dispatch('deleteSurvey', survey.id);
+  }
+}
 </script>
 
